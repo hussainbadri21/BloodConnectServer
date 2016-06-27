@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BloodConnectServer</string>
+    <string name="title_activity_select_camp">Select camp</string>
+</resources>
