@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hussain.bloodconnectserver">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -19,20 +21,25 @@
             android:name=".select_camp"
             android:label="@string/title_activity_select_camp"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="com.example.hussain.bloodconnectserver.select_camp" />
-
-            <category android:name="android.intent.category.default"/>
-        </intent-filter>
-        </activity>
-        <activity android:name=".add_camp">
             <intent-filter>
-                <action android:name="com.example.hussain.bloodconnectserver.add_camp" />
+                <action android:name="com.example.hussain.bloodconnectserver.select_camp" />
 
-                <category android:name="android.intent.category.default"/>
+                <category android:name="android.intent.category.default" />
             </intent-filter>
         </activity>
-    </application>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+    <activity android:name=".add_camp">
+        <intent-filter>
+            <action android:name="com.example.hussain.bloodconnectserver.add_camp" />
+
+            <category android:name="android.intent.category.default" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".show_donor">
+        <intent-filter>
+        <action android:name="com.example.hussain.bloodconnectserver.show_donor" />
+
+        <category android:name="android.intent.category.default" />
+    </intent-filter></activity>
+</application>
 </manifest>
