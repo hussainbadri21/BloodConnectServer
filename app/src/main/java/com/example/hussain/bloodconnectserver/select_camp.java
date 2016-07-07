@@ -126,7 +126,7 @@ public class select_camp extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
-                Toast.makeText(getApplicationContext(),"why u do dis?",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(),"why u do dis?",Toast.LENGTH_SHORT).show();
             }
         }
     }

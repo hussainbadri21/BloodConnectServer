@@ -1,10 +1,14 @@
 package com.example.hussain.bloodconnectserver;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,7 +35,9 @@ public class show_donor extends AppCompatActivity {
 
     private static final String TAG_NAME = "name";
 
+    private static final String TAG_STATUS= "status";
 
+    public String status;
 
 
     JSONArray peoples = null;
@@ -49,6 +55,43 @@ public class show_donor extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                /*Toast.makeText(getApplicationContext(),
+                        parent.getItemAtPosition(position) + "  is selected.", Toast.LENGTH_LONG)
+                        .show();*/
+                String s1=parent.getItemAtPosition(position).toString();
+                int y=s1.indexOf(':');
+                String s2=s1.substring(++y).trim();
+              //  Toast.makeText(getApplicationContext(),s2,Toast.LENGTH_SHORT).show();
+                if(s2.equalsIgnoreCase("Health Checkup")) {
+                    //Toast.makeText(getApplicationContext(),s2,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(show_donor.this, HealthCheckup.class);
+                    String x =s1.substring(0,--y);
+                    intent.putExtra("arg", x);
+                    startActivity(intent);
+                }
+                else
+                if(s2.equalsIgnoreCase("Donation")) {
+                    Intent intent = new Intent(show_donor.this, donation.class);
+                    String x =s1.substring(0,y);
+                    intent.putExtra("arg", x);
+                    startActivity(intent);
+                }
+                else
+                if(s2.equalsIgnoreCase("Refreshment")) {
+                    Intent intent = new Intent(show_donor.this, refreshment.class);
+                    String x =s1.substring(0,y);
+                    intent.putExtra("arg", x);
+                    startActivity(intent);
+                }
+
+            }
+
+        });
+
     }
 
     public void getData(){
@@ -105,8 +148,10 @@ public class show_donor extends AppCompatActivity {
             JSONObject c = peoples.getJSONObject(i);
 
             String name = c.getString(TAG_NAME);
+             status=c.getString(TAG_STATUS);
+           String z=name+" : "+status;
 
-            list.add(name);
+            list.add(z);
             adapter.notifyDataSetChanged();
 
 
