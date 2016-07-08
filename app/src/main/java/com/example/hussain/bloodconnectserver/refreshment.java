@@ -36,6 +36,9 @@ public class refreshment extends AppCompatActivity {
 
             if(pass.length()!=0)
                 new AddNewPrediction().execute(pass);
+            Intent i = new Intent(refreshment.this, show_donor.class);
+            startActivity(i);
+            finish();
         }
     });
 }

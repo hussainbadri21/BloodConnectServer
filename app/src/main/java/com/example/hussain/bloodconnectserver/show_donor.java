@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,9 +36,9 @@ public class show_donor extends AppCompatActivity {
 
     private static final String TAG_NAME = "name";
 
-    private static final String TAG_STATUS= "status";
+Button b1,b2;
 
-    public String status;
+
 
 
     JSONArray peoples = null;
@@ -59,34 +60,37 @@ public class show_donor extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                /*Toast.makeText(getApplicationContext(),
-                        parent.getItemAtPosition(position) + "  is selected.", Toast.LENGTH_LONG)
-                        .show();*/
-                String s1=parent.getItemAtPosition(position).toString();
-                int y=s1.indexOf(':');
-                String s2=s1.substring(++y).trim();
-              //  Toast.makeText(getApplicationContext(),s2,Toast.LENGTH_SHORT).show();
-                if(s2.equalsIgnoreCase("Health Checkup")) {
-                    //Toast.makeText(getApplicationContext(),s2,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(show_donor.this, HealthCheckup.class);
-                    String x =s1.substring(0,--y);
-                    intent.putExtra("arg", x);
-                    startActivity(intent);
-                }
-                else
-                if(s2.equalsIgnoreCase("Donation")) {
-                    Intent intent = new Intent(show_donor.this, donation.class);
-                    String x =s1.substring(0,y);
-                    intent.putExtra("arg", x);
-                    startActivity(intent);
-                }
-                else
-                if(s2.equalsIgnoreCase("Refreshment")) {
-                    Intent intent = new Intent(show_donor.this, refreshment.class);
-                    String x =s1.substring(0,y);
-                    intent.putExtra("arg", x);
-                    startActivity(intent);
-                }
+
+                Intent intent = new Intent(show_donor.this, status.class);
+                intent.putExtra("arg",parent.getItemAtPosition(position).toString());
+                startActivity(intent);
+           b1=(Button)findViewById(R.id.accept);
+                b2=(Button)findViewById(R.id.reject);
+                b1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplication(),"Please wait",Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(show_donor.this,accept.class);
+                        startActivity(i);
+                        Toast.makeText(getApplication(),"Please wait",Toast.LENGTH_SHORT).show();
+                        //finish();
+                    }
+                });
+
+                b2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        Intent i = new Intent(show_donor.this,reject.class);
+                        startActivity(i);
+                       // finish();
+                    }
+                });
+
+
+
 
             }
 
@@ -148,10 +152,10 @@ public class show_donor extends AppCompatActivity {
             JSONObject c = peoples.getJSONObject(i);
 
             String name = c.getString(TAG_NAME);
-             status=c.getString(TAG_STATUS);
-           String z=name+" : "+status;
+          //   status=c.getString(TAG_STATUS);
 
-            list.add(z);
+
+            list.add(name);
             adapter.notifyDataSetChanged();
 
 

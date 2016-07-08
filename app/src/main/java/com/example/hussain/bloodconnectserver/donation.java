@@ -23,7 +23,7 @@ TextView tx;
             @Override
             public void onClick(View view) {
 
-                Intent i=new Intent(donation.this,refreshment.class);
+                Intent i=new Intent(donation.this,show_donor.class);
                 i.putExtra("arg",pass);
                 startActivity(i);
                 finish();

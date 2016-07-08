@@ -48,19 +48,40 @@
                 <category android:name="android.intent.category.default" />
             </intent-filter>
         </activity>
-        <activity android:name=".donation" >
-        <intent-filter>
-            <action android:name="com.example.hussain.bloodconnectserver.donation" />
+        <activity android:name=".donation">
+            <intent-filter>
+                <action android:name="com.example.hussain.bloodconnectserver.donation" />
 
-            <category android:name="android.intent.category.default" />
-        </intent-filter>
-       </activity>
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </activity>
         <activity android:name=".refreshment">
+            <intent-filter>
+                <action android:name="com.example.hussain.bloodconnectserver.refreshment" />
+
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".status">
+            <intent-filter>
+                <action android:name="com.example.hussain.bloodconnectserver.status" />
+
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".accept" >
         <intent-filter>
-            <action android:name="com.example.hussain.bloodconnectserver.refreshment" />
+            <action android:name="com.example.hussain.bloodconnectserver.accept" />
 
             <category android:name="android.intent.category.default" />
         </intent-filter>
+        </activity>
+        <activity android:name=".reject">
+            <intent-filter>
+                <action android:name="com.example.hussain.bloodconnectserver.reject" />
+
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -34,16 +34,9 @@ import java.util.List;
 public class HealthCheckup extends AppCompatActivity {
     String pass;
     TextView tx;
-    InputStream is = null;
+    public String URL_NEW_PREDICTION2="http://blloodconnect.net16.net/reject.php";
     Button b1, b2, b3;
-    String status = "Donation";
-    String name;
-    String result = null;
-    String line = null;
-    int code;
-    JSONParser jsonParser = new JSONParser();
-    private static final String TAG_SUCCESS = "success";
-    private String URL_NEW_PREDICTION2 = "http://blloodconnect.net16.net/up.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,29 +51,29 @@ public class HealthCheckup extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddNewPrediction2().execute(pass,status);
-                Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(HealthCheckup.this, show_donor.class);
-
                 startActivity(i);
                 finish();
             }
         });
-       /* b2.setOnClickListener(new View.OnClickListener() {
+        b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(pass.length()!=0)
                     new AddNewPrediction2().execute(pass);
+                Intent i = new Intent(HealthCheckup.this, show_donor.class);
+                startActivity(i);
+                finish();
             }
-        });*/
+        });
 
 
     }
 
 
 
-    private class AddNewPrediction2 extends AsyncTask<String, Void, Void> {
+private class AddNewPrediction2 extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -92,13 +85,13 @@ public class HealthCheckup extends AppCompatActivity {
         protected Void doInBackground(String... arg) {
             // TODO Auto-generated method stub
             String name = arg[0];
-           String  status=arg[1];
+
 
 
             // Preparing post params
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("name", name));
-            params.add(new BasicNameValuePair("status", status));
+
             Sender serviceClient = new Sender();
 
             String json = serviceClient.makeServiceCall(URL_NEW_PREDICTION2,
@@ -136,75 +129,6 @@ public class HealthCheckup extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*private class AddNewPrediction2 extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Void doInBackground(String... arg) {
-            // TODO Auto-generated method stub
-            String name = arg[0];
-
-
-
-            // Preparing post params
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("name", name));
-
-            Sender serviceClient = new Sender();
-
-            String json = serviceClient.makeServiceCall(URL_NEW_PREDICTION2,
-                    Sender.POST, params);
-
-            Log.d("Create Prediction Request: ", "> " + json);
-
-            if (json != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(json);
-                    boolean error = jsonObj.getBoolean("error");
-                    // checking for error node in json
-                    if (!error) {
-                        // new category created successfully
-                        Log.e("Prediction added successfully ",
-                                "> " + jsonObj.getString("message"));
-                    } else {
-                        Log.e("Add Prediction Error: ",
-                                "> " + jsonObj.getString("message"));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            } else {
-                Log.e("JSON Data", "JSON data error!");
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-        }
-    }*/
 
 
 
